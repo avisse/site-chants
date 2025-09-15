@@ -109,18 +109,28 @@ h1, h2, h3, h4, h5, h6 {
   line-height: 1.6;
 }
 
-/* Avatar rond */
-.profile-pic{
-  width: 340px;
-  height: 340px;
-  object-fit: cover;
-  object-position: 50% 58%; /* décale un peu vers le bas si besoin */
-  border-radius: 50%;
-  background: #fff;
-  padding: 6px;
-  box-shadow: 0 6px 24px rgba(0,0,0,.18);
+/* Header compact */
+.about-header{ margin: 0 0 1.5rem; }
+.about-kicker{
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  font-weight: 700;
+  font-size: .9rem;
+  opacity: .6;
 }
-
+.about-title{
+  font-weight: 800;
+  font-size: 28px;
+  color: #3b4a5a;
+  margin: .2rem 0 .6rem;
+}
+.about-lead{
+  max-width: 900px;
+  margin: 0 auto 1.2rem;
+  color: #6b7280;
+  font-style: italic;
+  line-height: 1.6;
+}
 /* Contacts alignés */
 .contact-list{ list-style: none; padding: 0; margin: 0; }
 .contact-list li{
@@ -149,8 +159,6 @@ h1, h2, h3, h4, h5, h6 {
   .contact-list li{ flex-wrap: wrap; }
   .contact-list .label{ min-width: 110px; }
 }
-
-
 /*--------------------------------------------------------------
 # Preloader
 --------------------------------------------------------------*/
