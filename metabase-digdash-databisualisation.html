@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>Datavisualisation – Metabase (Subventions)</title>
+  <meta content="Dashboard Metabase sur PostgreSQL : subventions par organisme, analyses temporelles, requêtes SQL et déploiement local." name="description">
+  <meta content="Metabase, PostgreSQL, Datavisualisation, Dashboard, SQL, Open Source" name="keywords">
+
+  <!-- Favicons -->
+  <link href="assets/img/favicon.png" rel="icon">
+  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600|Raleway:300,400,600|Poppins:300,400,600,700" rel="stylesheet">
+
+  <!-- Vendor CSS -->
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/icofont/icofont.min.css" rel="stylesheet">
+  <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link href="assets/vendor/venobox/venobox.css" rel="stylesheet">
+  <link href="assets/vendor/owl.carousel/assets/owl.carousel.min.css" rel="stylesheet">
+  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+
+  <!-- Main CSS -->
+  <link href="assets/css/style.css" rel="stylesheet">
+
+  <style>
+    /* Accordéons FAQ (même style que tes autres pages) */
+    .faq-item{border-bottom:1px solid #ddd;padding:10px 0}
+    .question{cursor:pointer;font-weight:600;margin-bottom:10px;position:relative}
+    .answer{max-height:0;overflow:hidden;margin-bottom:8px;transition:max-height .3s ease}
+    .arrow-icon{position:absolute;top:0;right:0;transition:transform .3s ease}
+    .answer-visible .arrow-icon{transform:rotate(180deg)}
+
+    /* Rendre les images du carrousel bien nettes */
+    .portfolio-details .owl-carousel img{border-radius:.35rem}
+    .badge-tech{background:#eef3ff;color:#0b2a42;border:1px solid #dce9ff;
+      border-radius:8px;padding:.28rem .55rem;margin:.1rem .35rem .1rem 0;font-size:.78rem}
+  </style>
+</head>
+
+<body>
+<main id="main">
+
+  <!-- ======= Portfolio Details ======= -->
+  <section id="portfolio-details" class="portfolio-details">
+    <div class="container" data-aos="fade-up">
+
+      <div class="row">
+        <!-- Colonne visuels -->
+        <div class="col-lg-8">
+          <h2 class="portfolio-title text-center" style="color:#007bff">
+            Datavisualisation – Subventions par Organisme (Metabase)
+          </h2>
+
+          <div class="owl-carousel portfolio-details-carousel">
+            <!-- Remplace/ajoute tes captures si besoin -->
+            <img src="assets/img/metabase/dashboard_principal.png" class="img-fluid" alt="Dashboard principal Metabase">
+            <img src="assets/img/metabase/graph_organismes.png" class="img-fluid" alt="Montant par organisme">
+            <img src="assets/img/metabase/graph_mensuel.png" class="img-fluid" alt="Évolution mensuelle des subventions">
+            <img src="assets/img/metabase/graph_par_objet.png" class="img-fluid" alt="Montant par finalité">
+          </div>
+        </div>
+
+        <!-- Colonne info -->
+        <div class="col-lg-4 portfolio-info">
+          <h3 class="text-center"><strong>Projet Data Viz — Metabase + PostgreSQL</strong></h3>
+          <ul>
+            <li><strong>Catégorie</strong> : Datavisualisation / Analytics</li>
+            <li><strong>Stack</strong> :
+              <span class="badge-tech">PostgreSQL</span>
+              <span class="badge-tech">Metabase</span>
+              <span class="badge-tech">Debian 12</span>
+              <span class="badge-tech">DBeaver</span>
+              <span class="badge-tech">Git</span>
+            </li>
+            <li><strong>Repo</strong> :
+              <a href="https://github.com/avisse/metabase-digdash-databisualisation" target="_blank" rel="noopener">
+                github.com/avisse/metabase-digdash-databisualisation
+              </a>
+            </li>
+          </ul>
+
+          <p class="mb-2">
+            Mise en place d’une <strong>chaîne locale de datavisualisation</strong> :
+            création d’une base PostgreSQL, <strong>injection de données</strong> (500+ lignes),
+            connexion Metabase et construction d’un <strong>dashboard métier</strong> pour suivre
+            les subventions par organisme, par mois et par type de finalité.
+          </p>
+
+          <h5>Indicateurs clés</h5>
+          <ul>
+            <li>Montant total des subventions par organisme</li>
+            <li>Évolution mensuelle (2020–2024)</li>
+            <li>Nombre de subventions par organisme</li>
+            <li>Montant par finalité (objet)</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="row mt-3">
+        <div class="col-lg-12">
+
+          <!-- FAQ 1 -->
+          <div class="faq-item">
+            <div class="question" onclick="toggleAnswer('faq1', this)">
+              1) Modèle de données & préparation
+              <span class="arrow-icon">▼</span>
+            </div>
+            <div id="faq1" class="answer">
+              <ul>
+                <li>Installation PostgreSQL (VM Debian 12) et création de la base <code>subventions_db</code></li>
+                <li>Table <code>subventions</code> : <code>id</code>, <code>organisme</code>, <code>objet</code>, <code>montant</code>, <code>date_versement</code></li>
+                <li>Génération et insertion de 500+ lignes réalistes (2020–2024)</li>
+                <li>Vérifications via DBeaver (typages, contraintes, index de base)</li>
+              </ul>
+              <pre class="bg-light p-3 rounded border"><code>-- Total des subventions par organisme
+SELECT organisme, SUM(montant) AS total
+FROM subventions
+GROUP BY organisme
+ORDER BY total DESC;
+
+-- Subventions mensuelles pour un organisme
+SELECT date_trunc('month', date_versement) AS mois, SUM(montant) AS total
+FROM subventions
+WHERE organisme = 'Association Sportive'
+GROUP BY mois
+ORDER BY mois;</code></pre>
+            </div>
+          </div>
+
+          <!-- FAQ 2 -->
+          <div class="faq-item">
+            <div class="question" onclick="toggleAnswer('faq2', this)">
+              2) Configuration Metabase & dashboard
+              <span class="arrow-icon">▼</span>
+            </div>
+            <div id="faq2" class="answer">
+              <ul>
+                <li>Lancement de Metabase (<code>localhost:3000</code>) et connexion à PostgreSQL</li>
+                <li>Typage des champs (Date, Numérique) et synchronisation des métadonnées</li>
+                <li>Création de vues/collections Metabase + cartes, barres, séries temporelles</li>
+                <li>Dashboard : organismes, par mois, par finalité, nombre de dossiers</li>
+              </ul>
+              <div class="mb-2">
+                <span class="badge-tech">Bar chart</span>
+                <span class="badge-tech">Line chart</span>
+                <span class="badge-tech">Area</span>
+                <span class="badge-tech">Table</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- FAQ 3 -->
+          <div class="faq-item">
+            <div class="question" onclick="toggleAnswer('faq3', this)">
+              3) Déploiement local rapide
+              <span class="arrow-icon">▼</span>
+            </div>
+            <div id="faq3" class="answer">
+              <pre class="bg-light p-3 rounded border"><code># Lancer PostgreSQL
+sudo service postgresql start
+
+# Créer base + injecter données
+psql -U postgres -d subventions_db -f sql/create_table.sql
+psql -U postgres -d subventions_db -f sql/insert_data.sql
+
+# Accéder à Metabase
+# http://localhost:3000</code></pre>
+              <p class="mb-1"><em>Alternative conteneurs</em> (si tu veux dockeriser plus tard) :
+                <span class="badge-tech">Metabase</span> + <span class="badge-tech">Postgres</span>
+                via <code>docker-compose</code> avec persistance des volumes.
+              </p>
+            </div>
+          </div>
+
+          <!-- FAQ 4 -->
+          <div class="faq-item">
+            <div class="question" onclick="toggleAnswer('faq4', this)">
+              4) Résultats & bénéfices
+              <span class="arrow-icon">▼</span>
+            </div>
+            <div id="faq4" class="answer">
+              <ul>
+                <li>Vision claire des montants par organisme & par finalité</li>
+                <li>Suivi temporel fiable (mensuel) pour décider / planifier</li>
+                <li>Requêtes SQL documentées et ré-utilisables</li>
+                <li>Base prête pour l’automatisation (exports, alertes)</li>
+              </ul>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </section><!-- End Portfolio Details -->
+</main>
+
+<a href="#" class="back-to-top"><i class="bx bx-up-arrow-alt"></i></a>
+<div id="preloader"></div>
+
+<!-- Vendor JS -->
+<script>
+  function toggleAnswer(id, el){
+    const ans=document.getElementById(id);
+    ans.classList.toggle("answer-visible");
+    el.classList.toggle("answer-visible");
+    ans.style.maxHeight = ans.style.maxHeight ? null : ans.scrollHeight + "px";
+  }
+</script>
+<script src="assets/vendor/jquery/jquery.min.js"></script>
+<script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="assets/vendor/jquery.easing/jquery.easing.min.js"></script>
+<script src="assets/vendor/waypoints/jquery.waypoints.min.js"></script>
+<script src="assets/vendor/counterup/counterup.min.js"></script>
+<script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+<script src="assets/vendor/venobox/venobox.min.js"></script>
+<script src="assets/vendor/owl.carousel/owl.carousel.min.js"></script>
+<script src="assets/vendor/aos/aos.js"></script>
+<script src="assets/js/main.js"></script>
+</body>
+</html>
