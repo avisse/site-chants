@@ -1,18 +1,22 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  <title>Datavisualisation – Metabase & PostgreSQL (Docker)</title>
+
+  <title>Metabase – Data Visualisation | Steve Avisse</title>
+  <meta name="description" content="Projet DataViz : stack Docker (PostgreSQL + Metabase), chargement SQL, dashboard, sauvegardes automatisées.">
+  <meta name="keywords" content="Metabase, Docker, PostgreSQL, DataViz, Dashboard, SQL, Backup">
 
   <!-- Favicons -->
   <link href="assets/img/favicon.png" rel="icon">
   <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
   <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700|Raleway:300,400,500,600,700|Poppins:300,400,500,600,700" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
 
-  <!-- Vendor CSS -->
+  <!-- Vendor CSS Files -->
   <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <link href="assets/vendor/icofont/icofont.min.css" rel="stylesheet">
   <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
@@ -20,75 +24,135 @@
   <link href="assets/vendor/owl.carousel/assets/owl.carousel.min.css" rel="stylesheet">
   <link href="assets/vendor/aos/aos.css" rel="stylesheet">
 
-  <!-- Main CSS -->
+  <!-- Template Main CSS File -->
   <link href="assets/css/style.css" rel="stylesheet">
 
+  <!-- Styles locaux (lisibilité + accent couleurs) -->
   <style>
-    /* Accordéons "FAQ" */
-    .faq-item { border-bottom: 1px solid #e9ecef; padding: 14px 0; }
-    .question { cursor: pointer; font-weight: 600; padding-right: 24px; position: relative; }
-    .answer   { max-height: 0; overflow: hidden; transition: max-height .3s ease; }
-    .arrow-icon { position: absolute; right: 0; top: 0; transition: transform .3s ease; }
-    .answer-visible .arrow-icon { transform: rotate(180deg); }
+    :root{
+      --accent:#f2559e;   /* rose doux */
+      --accent2:#007bff;  /* bleu charte */
+      --ink:#0b1420;
+    }
+    .lead-intro{
+      font-size:1.05rem; line-height:1.6; color:#4a5568; margin:6px 0 18px;
+    }
+    .accent{color:var(--accent); font-weight:700;}
+    .tech-tags{margin:8px 0 18px; display:flex; flex-wrap:wrap; gap:8px;}
+    .tag{
+      background:rgba(242,85,158,.08); color:#b71862; border:1px solid rgba(242,85,158,.25);
+      padding:4px 10px; border-radius:999px; font-size:.85rem; font-weight:600;
+    }
+    .btn-ghost{
+      display:inline-block; padding:10px 14px; border-radius:10px; font-weight:600;
+      border:2px solid var(--accent2); color:var(--accent2); text-decoration:none;
+    }
+    .btn-ghost:hover{ background:var(--accent2); color:#fff; }
+
+    /* blocs code lisibles */
+    pre{ background:#0f172a; color:#e2e8f0; padding:14px; border-radius:12px; overflow:auto; }
+    pre code{ font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace; font-size:.92rem; }
+    .soft{ color:#94a3b8; }
+
+    /* accordéons */
+    .faq-item{ border-bottom:1px solid #e9ecef; padding:14px 0; }
+    .question{ cursor:pointer; font-weight:700; padding-right:24px; position:relative; color:#1f2937;}
+    .answer{ max-height:0; overflow:hidden; transition:max-height .3s ease; }
+    .arrow-icon{ position:absolute; right:0; top:0; transition:transform .3s ease; color:var(--accent2);}
+    .answer-visible .arrow-icon{ transform:rotate(180deg); }
+
+    /* arrondi léger sur les images du carrousel */
+    .portfolio-details-carousel img{ border-radius:14px; }
   </style>
 </head>
 
 <body>
-<main id="main">
-  <!-- ======= Portfolio Details ======= -->
-  <section id="portfolio-details" class="portfolio-details">
-    <div class="container" data-aos="fade-up">
 
-      <div class="row">
-        <!-- Colonne gauche : titre + carrousel -->
-        <div class="col-lg-8">
-          <h2 class="portfolio-title" style="text-align:center;color:#007bff">
-            Datavisualisation – Metabase & PostgreSQL (Docker Compose)
-          </h2>
+  <main id="main">
+    <!-- ======= Portfolio Details ======= -->
+    <section id="portfolio-details" class="portfolio-details">
+      <div class="container" data-aos="fade-up">
 
-          <div class="owl-carousel portfolio-details-carousel">
-            <!-- Remplace/complète ces images par tes captures -->
-            <img src="assets/img/digdash6.jpg" class="img-fluid" alt="Capture Metabase 1">
-            <img src="assets/img/digdash 4.png" class="img-fluid" alt="Capture Metabase 2">
-            <img src="assets/img/digdash5.jpg" class="img-fluid" alt="Capture Metabase 3">
-             <img src="assets/img/digdash7.jpg" class="img-fluid" alt="Capture Metabase 3">
-             <img src="assets/img/digdash8.jpg" class="img-fluid" alt="Capture Metabase 3">
-          </div>
-        </div>
+        <div class="row">
 
-        <!-- Colonne droite : résumé projet -->
-        <div class="col-lg-4 portfolio-info">
-          <h3 style="text-align:center"><strong>Subventions : dashboard Metabase dockerisé</strong></h3>
-          <ul>
-            <li><strong>Catégorie</strong> : Application / DataViz</li>
-            <li><strong>Stack</strong> : Docker Compose, PostgreSQL 15, Metabase</li>
-            <li><strong>Contexte</strong> : VM Debian 12 (local)</li>
-            <li><strong>Livrables</strong> : BDD de démo, questions Metabase, dashboard, scripts de sauvegarde</li>
-          </ul>
-          <p>
-            Mise en place d’une chaîne locale de datavisualisation pour suivre les
-            subventions (montants, saisonnalités, répartitions par organisme et finalité).
-            L’infra est décrite en Docker Compose, les données sont injectées via SQL,
-            et les tableaux de bord sont partagés depuis Metabase.
-          </p>
-        </div>
+          <!-- Colonne gauche : carrousel -->
+          <div class="col-lg-8">
+            <h2 class="portfolio-title" style="text-align:center; color: var(--accent2);">
+              Metabase – Chaîne DataViz dockerisée (PostgreSQL + Dashboard)
+            </h2>
 
-        <!-- ======= Accordéons détaillés ======= -->
-        <div class="col-lg-12 portfolio-info">
-
-          <!-- Architecture & Docker -->
-          <div class="faq-item">
-            <div class="question" onclick="toggleAnswer('a1', this)">
-              Architecture & Docker Compose
-              <span class="arrow-icon">▼</span>
+            <div class="owl-carousel portfolio-details-carousel">
+              <!-- Remplace/ajoute tes captures ici -->
+              <img src="assets/img/metabase/dashboard_principal.png" class="img-fluid" alt="Dashboard principal Metabase">
+              <img src="assets/img/metabase/graph_1_organismes.png" class="img-fluid" alt="Top organismes">
+              <img src="assets/img/metabase/graph_2_mensuel.png" class="img-fluid" alt="Evolution mensuelle">
+              <img src="assets/img/metabase/graph_3_finalites.png" class="img-fluid" alt="Répartition par finalité">
             </div>
-            <div class="answer" id="a1">
-              <p><strong>Objectif :</strong> avoir un environnement jetable et reproductible
-              (infra locale “as code”). Deux services : <em>postgres</em> + <em>metabase</em>,
-              volumes persistants, même réseau Docker.</p>
+          </div>
 
-<pre><code class="language-yaml"># docker-compose.yml (extrait simplifié)
-version: "3.8"
+          <!-- Colonne droite : résumé / tags / lien repo -->
+          <div class="col-lg-4 portfolio-info">
+            <h3 style="text-align:center"><strong>Subventions – Dashboard Metabase</strong></h3>
+
+            <p class="lead-intro">
+              Je voulais une chaîne <span class="accent">DataViz locale, reproductible</span> :
+              <strong>PostgreSQL</strong> pour les données, <strong>Metabase</strong> pour l’analyse,
+              et <strong>Docker Compose</strong> pour démarrer/stopper le tout en une commande.
+              L’objectif : <em>packager l’infra, structurer la donnée et exposer des indicateurs métier clairs</em>.
+            </p>
+
+            <div class="tech-tags">
+              <span class="tag">Docker Compose</span>
+              <span class="tag">PostgreSQL 15</span>
+              <span class="tag">Metabase</span>
+              <span class="tag">SQL</span>
+              <span class="tag">Backups</span>
+            </div>
+
+            <ul style="margin-bottom:14px">
+              <li><strong>Catégorie</strong> : Application / DataViz</li>
+              <li><strong>Contexte</strong> : VM Debian 12 (local)</li>
+              <li><strong>Livrables</strong> : BDD démo, questions Metabase, dashboard, scripts de sauvegarde</li>
+            </ul>
+
+            <a class="btn-ghost" href="https://github.com/avisse/metabase-digdash-databisualisation" target="_blank" rel="noopener">
+              Voir le repository GitHub
+            </a>
+          </div>
+
+          <!-- ======= Accordéons détaillés (pleine largeur) ======= -->
+          <div class="col-lg-12 portfolio-info" style="margin-top:24px">
+
+            <!-- Contexte & objectifs -->
+            <div class="faq-item">
+              <div class="question" onclick="toggleAnswer('cx', this)">
+                Contexte & objectifs
+                <span class="arrow-icon">▼</span>
+              </div>
+              <div class="answer" id="cx">
+                <p>
+                  Côté produit, le besoin est d’<strong>analyser des subventions</strong> par organisme, finalité
+                  et période pour raconter une histoire (évolution, saisonnalité, top bénéficiaires).
+                  Côté technique, je veux un <strong>environnement reproductible</strong> : on clône, on lance,
+                  et tout fonctionne (base, données, visus). Je privilégie Docker pour la portabilité, et j’ajoute une
+                  <strong>stratégie de sauvegarde</strong> pour la robustesse.
+                </p>
+              </div>
+            </div>
+
+            <!-- Architecture & Docker -->
+            <div class="faq-item">
+              <div class="question" onclick="toggleAnswer('a1', this)">
+                Architecture & Docker Compose
+                <span class="arrow-icon">▼</span>
+              </div>
+              <div class="answer" id="a1">
+                <p>
+                  Deux services (<code>db</code> et <code>metabase</code>) sur le même réseau Docker, avec
+                  <strong>volumes persistants</strong> pour ne pas perdre l’état. Je peux redémarrer la stack
+                  sans reconfigurer Metabase ni la base.
+                </p>
+<pre><code class="language-yaml">version: "3.8"
 services:
   db:
     image: postgres:15
@@ -116,140 +180,149 @@ services:
     volumes:
       - metabase-data:/metabase-data
     restart: unless-stopped
-volumes:
-  pgdata:
-  metabase-data:
+
+volumes: { pgdata: {}, metabase-data: {} }
 </code></pre>
-
-              <p>
-                <em>Lancement :</em> <code>docker compose up -d</code> puis accès à Metabase
-                sur <code>http://localhost:3000</code>.
-              </p>
+                <p class="soft">
+                  Lancement : <code>docker compose up -d</code> → Metabase sur <code>http://localhost:3000</code>.
+                </p>
+              </div>
             </div>
-          </div>
 
-          <!-- Données & SQL -->
-          <div class="faq-item">
-            <div class="question" onclick="toggleAnswer('a2', this)">
-              Modèle de données & chargement
-              <span class="arrow-icon">▼</span>
-            </div>
-            <div class="answer" id="a2">
-              <p>
-                Schéma minimaliste : table <code>subventions</code> (<code>id</code>, <code>organisme</code>,
-                <code>objet</code>, <code>montant</code>, <code>date_versement</code>), alimentée par
-                un script SQL étendu pour simuler plusieurs années et organismes.  
-                <em>Import :</em>
-              </p>
-<pre><code class="language-bash"># (si nécessaire) docker cp extended_subventions.sql dans ./sql/
+            <!-- Données & SQL -->
+            <div class="faq-item">
+              <div class="question" onclick="toggleAnswer('a2', this)">
+                Modèle de données & chargement
+                <span class="arrow-icon">▼</span>
+              </div>
+              <div class="answer" id="a2">
+                <p>
+                  <strong class="accent">Schéma minimaliste</strong> : table <code>subventions</code>
+                  (<code>id</code>, <code>organisme</code>, <code>objet</code>, <code>montant</code>, <code>date_versement</code>)
+                  alimentée par un script SQL étendu pour simuler plusieurs années et organismes.
+                </p>
+<pre><code class="language-bash"># Injection (depuis l'hôte)
 docker compose exec -T db psql -U postgres -d subventions_db \
   -f /docker-entrypoint-initdb.d/extended_subventions.sql
 </code></pre>
-              <p>
-                Dans Metabase : connexion à la base, typage des colonnes (date, nombre),
-                création des “Questions” puis assemblage en Dashboard (évolution mensuelle,
-                top organismes, répartition par finalité, etc.).
-              </p>
+                <p>
+                  Dans Metabase, je <strong>tippe correctement</strong> les colonnes (date, nombre),
+                  je crée des “Questions” (séries temporelles, top N, répartitions)
+                  puis je les assemble en <strong>Dashboard</strong> (évolution mensuelle, top organismes, total par finalité).
+                </p>
+              </div>
             </div>
-          </div>
 
-          <!-- Backups -->
-          <div class="faq-item">
-            <div class="question" onclick="toggleAnswer('a3', this)">
-              Sauvegarde & restauration (pg_dump)
-              <span class="arrow-icon">▼</span>
-            </div>
-            <div class="answer" id="a3">
-              <p>
-                Stratégie simple : dump quotidien + rétention 7 jours.
-                Script stocké côté hôte, exécuté via cron.
-              </p>
+            <!-- Sauvegarde & restauration -->
+            <div class="faq-item">
+              <div class="question" onclick="toggleAnswer('a3', this)">
+                Sauvegarde & restauration (pg_dump)
+                <span class="arrow-icon">▼</span>
+              </div>
+              <div class="answer" id="a3">
+                <p>
+                  <strong class="accent">La stratégie que j’ai décidée</strong> : un dump quotidien côté hôte avec
+                  <strong>rétention 7 jours</strong>. Pourquoi ? Parce que c’est :
+                  (1) trivial à déployer, (2) lisible/auditable, (3) suffisant pour une démo.
+                  J’ai donc écrit un script qui <em>génère un fichier horodaté, conserve 7 jours et simplifie la restauration</em>.
+                </p>
 <pre><code class="language-bash">#!/usr/bin/env bash
 set -euo pipefail
 STAMP=$(date +%Y%m%d_%H%M)
 OUT="backups/subventions_${STAMP}.sql"
 mkdir -p backups
 
-# Dump de la base "subventions_db"
+# Dump BDD
 docker compose exec -T db pg_dump -U postgres subventions_db &gt; "$OUT"
 
 # Rétention 7 jours
 find backups -type f -name "subventions_*.sql" -mtime +7 -delete
 echo "Backup OK -&gt; $OUT"
 </code></pre>
-
-<pre><code class="language-bash"># Cron (exemple) : tous les jours à 02h15
-15 2 * * * /bin/bash /chemin/vers/backup.sh &gt;&gt; /chemin/vers/backup.log 2&gt;&1
-</code></pre>
-
 <pre><code class="language-bash"># Restauration
-docker compose exec -T db psql -U postgres -d subventions_db &lt; backups/subventions_YYYYMMDD_HHMM.sql
+docker compose exec -T db psql -U postgres -d subventions_db \
+  &lt; backups/subventions_YYYYMMDD_HHMM.sql
 </code></pre>
+                <p class="soft">
+                  Cron d’exemple : <code>15 2 * * * /bin/bash /chemin/backup.sh &gt;&gt; /chemin/backup.log 2&gt;&1</code>
+                </p>
+              </div>
             </div>
-          </div>
 
-          <!-- Sécurité / Observabilité -->
-          <div class="faq-item">
-            <div class="question" onclick="toggleAnswer('a4', this)">
-              Sécurité & Observabilité minimales
-              <span class="arrow-icon">▼</span>
+            <!-- Sécurité / Observabilité -->
+            <div class="faq-item">
+              <div class="question" onclick="toggleAnswer('a4', this)">
+                Sécurité & observabilité minimales
+                <span class="arrow-icon">▼</span>
+              </div>
+              <div class="answer" id="a4">
+                <ul>
+                  <li>Variables sensibles dans un <code>.env</code> (pas d’identifiants en clair dans le YAML).</li>
+                  <li>Volumes <code>pgdata</code> / <code>metabase-data</code> pour la persistance.</li>
+                  <li>Logs temps réel : <code>docker compose logs -f db</code> / <code>metabase</code>.</li>
+                  <li>Si exposition externe : reverse proxy et authentification.</li>
+                </ul>
+              </div>
             </div>
-            <div class="answer" id="a4">
-              <ul>
-                <li>Variables d’env. via fichier <code>.env</code> (éviter les secrets en clair).</li>
-                <li>Volumes persistants (<code>pgdata</code>, <code>metabase-data</code>) pour l’état.</li>
-                <li>Logs : <code>docker compose logs -f db|metabase</code>, et export si besoin.</li>
-                <li>Accès Metabase restreint au LAN / reverse-proxy avec auth si exposition.</li>
-              </ul>
+
+            <!-- Résultats & enseignements -->
+            <div class="faq-item">
+              <div class="question" onclick="toggleAnswer('a5', this)">
+                Résultats & enseignements
+                <span class="arrow-icon">▼</span>
+              </div>
+              <div class="answer" id="a5">
+                <ul>
+                  <li>Un <strong>dashboard démonstrateur</strong> (évolution, top organismes, finalités).</li>
+                  <li>Une stack <strong>reproductible</strong> (Compose) + dataset réaliste + scripts.</li>
+                  <li>Un pitch clair : <em>je sais packager, alimenter et opérer une chaîne DataViz</em>.</li>
+                </ul>
+                <p>
+                  <a class="btn-ghost" href="https://github.com/avisse/metabase-digdash-databisualisation" target="_blank" rel="noopener">
+                    Ouvrir le repo (code & fichiers SQL)
+                  </a>
+                </p>
+              </div>
             </div>
-          </div>
 
-          <!-- Résultats -->
-          <div class="faq-item">
-            <div class="question" onclick="toggleAnswer('a5', this)">
-              Résultats & livrables
-              <span class="arrow-icon">▼</span>
-            </div>
-            <div class="answer" id="a5">
-              <ul>
-                <li>Dashboard sur l’évolution mensuelle, les Top organismes et
-                    la répartition par finalité.</li>
-                <li>Pipeline reproductible (Compose) + dataset de démonstration.</li>
-                <li>Scripts d’initialisation et de sauvegarde documentés.</li>
-              </ul>
-            </div>
-          </div>
+          </div><!-- /col-12 -->
 
-        </div>
-        <!-- /col-12 -->
-      </div>
-    </div>
-  </section>
-</main>
+        </div><!-- /row -->
+      </div><!-- /container -->
+    </section><!-- End Portfolio Details -->
+  </main><!-- End #main -->
 
-<a href="#" class="back-to-top"><i class="bx bx-up-arrow-alt"></i></a>
-<div id="preloader"></div>
+  <a href="#" class="back-to-top"><i class="bx bx-up-arrow-alt"></i></a>
+  <div id="preloader"></div>
 
-<!-- Vendor JS -->
-<script>
-  function toggleAnswer(id, el){
-    const a = document.getElementById(id);
-    a.classList.toggle("answer-visible");
-    el.classList.toggle("answer-visible");
-    a.style.maxHeight = a.style.maxHeight ? null : (a.scrollHeight + "px");
-  }
-</script>
-<script src="assets/vendor/jquery/jquery.min.js"></script>
-<script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-<script src="assets/vendor/jquery.easing/jquery.easing.min.js"></script>
-<script src="assets/vendor/php-email-form/validate.js"></script>
-<script src="assets/vendor/waypoints/jquery.waypoints.min.js"></script>
-<script src="assets/vendor/counterup/counterup.min.js"></script>
-<script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
-<script src="assets/vendor/venobox/venobox.min.js"></script>
-<script src="assets/vendor/owl.carousel/owl.carousel.min.js"></script>
-<script src="assets/vendor/typed.js/typed.min.js"></script>
-<script src="assets/vendor/aos/aos.js"></script>
-<script src="assets/js/main.js"></script>
+  <!-- Vendor JS Files -->
+  <script src="assets/vendor/jquery/jquery.min.js"></script>
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/vendor/jquery.easing/jquery.easing.min.js"></script>
+  <script src="assets/vendor/php-email-form/validate.js"></script>
+  <script src="assets/vendor/waypoints/jquery.waypoints.min.js"></script>
+  <script src="assets/vendor/counterup/counterup.min.js"></script>
+  <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+  <script src="assets/vendor/venobox/venobox.min.js"></script>
+  <script src="assets/vendor/owl.carousel/owl.carousel.min.js"></script>
+  <script src="assets/vendor/typed.js/typed.min.js"></script>
+  <script src="assets/vendor/aos/aos.js"></script>
+
+  <!-- Template Main JS File -->
+  <script src="assets/js/main.js"></script>
+
+  <!-- Accordéons -->
+  <script>
+    function toggleAnswer(answerId, question){
+      var answer = document.getElementById(answerId);
+      answer.classList.toggle("answer-visible");
+      question.classList.toggle("answer-visible");
+      if (answer.style.maxHeight){
+        answer.style.maxHeight = null;
+      } else {
+        answer.style.maxHeight = answer.scrollHeight + "px";
+      }
+    }
+  </script>
 </body>
 </html>
