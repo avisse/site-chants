@@ -59,33 +59,33 @@ h1, h2, h3, h4, h5, h6 {
 /*--------------------------------------------------------------
 # photo profil
 --------------------------------------------------------------*/
-/* Photo profil – grande, ronde, centrée, avec anneau blanc */
+/* Photo profil */
 .profile-pic{
-  width: 320px;
+  width: 320px;            /* plus grand sur desktop */
   height: 320px;
   object-fit: cover;
   border-radius: 50%;
-  background: #fff;      /* anneau blanc */
-  padding: 6px;          /* épaisseur de l’anneau */
+  background: #fff;        /* anneau blanc propre */
+  padding: 6px;            /* épaisseur de l’anneau */
   box-shadow: 0 6px 24px rgba(0,0,0,.18);
-  display: block;
 }
 
-/* Sécurité : centrer la colonne image si la grille change */
+/* Centrer et respirer la colonne image */
 .about .col-lg-4{
   display: flex;
   justify-content: center;
 }
 
-/* Responsive : plus petite sur mobile/tablette */
+/* Responsive : plus petit sur mobile/tablette */
 @media (max-width: 991.98px){
   .profile-pic{
-    width: 220px;
-    height: 220px;
-    padding: 5px;
+    width: 200px;
+    height: 200px;
+    padding: 4px;
     box-shadow: 0 4px 16px rgba(0,0,0,.15);
   }
 }
+
 
 /*--------------------------------------------------------------
 # Preloader
