@@ -3,14 +3,14 @@
 <head>
   <meta charset="utf-8" />
   <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-  <title>Automatisation EKS + Lambda (Terraform) — Steve Avisse</title>
+  <title>Activité 1 — EKS + Lambda (Terraform)</title>
 
   <!-- Favicons -->
   <link href="assets/img/favicon.png" rel="icon" />
   <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon" />
 
   <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700|Raleway:300,400,500,600,700|Poppins:300,400,500,600,700" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700|Poppins:300,400,500,600,700" rel="stylesheet" />
 
   <!-- Vendor CSS -->
   <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
@@ -20,369 +20,417 @@
   <link href="assets/vendor/owl.carousel/assets/owl.carousel.min.css" rel="stylesheet" />
   <link href="assets/vendor/aos/aos.css" rel="stylesheet" />
 
-  <!-- Template main CSS -->
+  <!-- Template Main CSS -->
   <link href="assets/css/style.css" rel="stylesheet" />
 
-  <!-- Page styles -->
   <style>
-    /* Petits plus visuels */
-    .section-kicker{color:#6c757d;font-weight:600;letter-spacing:.08em;text-transform:uppercase}
-    .brand-blue{color:#007bff}
-    .chip{display:inline-block;background:#eef5ff;border:1px solid #d7e6ff;border-radius:999px;padding:.3rem .7rem;font-size:.85rem;margin:.15rem .25rem}
-    .muted{color:#6c757d}
-    .code, pre code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.92rem;background:#0f172a;color:#e6edf3;border-radius:10px;padding:1rem;display:block;overflow:auto}
-    .hl{background: linear-gradient(180deg,rgba(255,235,59,.0) 60%, rgba(255,235,59,.55) 60%)}
-    /* FAQ repliable */
-    .faq-item{border-bottom:1px solid #e9ecef;padding:12px 2px}
-    .question{cursor:pointer;font-weight:600;position:relative;padding-right:28px;margin:0}
-    .question .arrow{position:absolute;right:0;top:0;transition:transform .25s ease}
-    .answer{max-height:0;overflow:hidden;transition:max-height .3s ease;margin-top:.35rem}
-    .answer.visible{max-height:2000px}
-    .question.active .arrow{transform:rotate(180deg)}
-    /* Tableau problèmes */
-    .table-issues th{white-space:nowrap}
-    .table-issues td,.table-issues th{vertical-align:top}
-    /* Carousel image border */
-    .portfolio-details-carousel img{border-radius:12px}
+    /* Accent & chips */
+    :root { --brand:#0a66ff; }
+    .chip {
+      display:inline-block; padding:.2rem .6rem; border:1px solid rgba(10,102,255,.18);
+      background:rgba(10,102,255,.06); color:#1b2a4e; border-radius:999px; font-size:.78rem; margin:0 .25rem .35rem 0;
+    }
+    .aside-card {
+      background:#fff; border:1px solid #e9eef5; border-radius:12px; padding:16px 18px;
+      box-shadow:0 8px 20px rgba(2,21,78,.04);
+    }
+    .aside-card h5 { font-weight:600; color:#334; }
+    .kicker { color:#6b7a90; font-size:.95rem; }
+    .btn-repo {
+      display:inline-flex; align-items:center; gap:.45rem;
+      background:var(--brand); color:#fff !important; border:none; border-radius:10px;
+      padding:.55rem .9rem; font-weight:600;
+      box-shadow:0 10px 18px rgba(10,102,255,.22);
+      transition:transform .12s ease;
+    }
+    .btn-repo:hover { transform:translateY(-1px); }
+    .btn-repo i { font-size:1.1rem; }
+
+    /* Accordéons minimalistes */
+    .faq-item { border-bottom:1px solid #edf2f7; }
+    .question {
+      cursor:pointer; padding:16px 6px; font-weight:600; color:#1f2a44; position:relative;
+    }
+    .question .arrow {
+      position:absolute; right:8px; top:50%; transform:translateY(-50%);
+      width:22px; height:22px; display:grid; place-items:center;
+      color:var(--brand); border-radius:50%;
+    }
+    .answer { max-height:0; overflow:hidden; transition:max-height .3s ease; }
+    .answer-visible { max-height:2200px; }
+    .question.answer-visible .arrow { transform:translateY(-50%) rotate(180deg); }
+
+    /* Carousel img fit */
+    .portfolio-details-carousel img { border-radius:12px; box-shadow:0 14px 28px rgba(0,0,0,.08); }
+
+    /* Small code blocks */
+    pre, code { background:#0f172a; color:#e5e7eb; border-radius:10px; }
+    pre { padding:14px 16px; overflow:auto; }
+    code { padding:2px 6px; }
   </style>
 </head>
 
 <body>
-  <main id="main">
-    <!-- ======= Portfolio Details ======= -->
-    <section id="portfolio-details" class="portfolio-details">
-      <div class="container" data-aos="fade-up">
+<main id="main">
 
-        <!-- En-tête / contexte -->
-        <div class="row mb-4">
-          <div class="col-lg-12">
-            <p class="section-kicker mb-1">Projet cloud & devops</p>
-            <h2 class="portfolio-title text-center brand-blue">
-              Automatisation du déploiement d’un cluster Kubernetes (EKS)<br class="d-none d-md-block" />
-              + Service Serverless (AWS Lambda)
-            </h2>
-            <p class="text-center muted mb-4">
-              <span class="hl">Objectif :</span> mettre en place, <strong>de façon 100% automatisée</strong>, un cluster
-              <strong>EKS</strong> prêt à l’emploi et un <strong>service serverless Lambda (Java)</strong> déployé depuis une
-              VM de travail. Le tout décrit en <strong>Terraform</strong>, testé, documenté et nettoyé proprement.
-            </p>
+  <!-- ======= Portfolio Details ======= -->
+  <section id="portfolio-details" class="portfolio-details">
+    <div class="container" data-aos="fade-up">
+
+      <div class="row">
+        <div class="col-lg-8">
+          <h2 class="portfolio-title" style="text-align:center; color:var(--brand);">
+            Automatisation EKS + Lambda (Terraform) — Free Tier AWS
+          </h2>
+
+          <!-- Carousel -->
+          <div class="owl-carousel portfolio-details-carousel">
+            <img src="assets/img/eks/01_ec2_instance_resume.JPG" class="img-fluid" alt="Résumé instance EC2">
+            <img src="assets/img/eks/02_ec2_instance_networking.JPG" class="img-fluid" alt="Réseau EC2 / VPC">
+            <img src="assets/img/eks/03_ec2_storage_monitoring.JPG" class="img-fluid" alt="Stockage / monitoring EC2">
+            <img src="assets/img/eks/04_eks_cluster_dashboard.JPG" class="img-fluid" alt="Dashboard EKS">
+            <img src="assets/img/eks/08_cluster_eks_details.JPG" class="img-fluid" alt="Détails Cluster EKS">
+            <img src="assets/img/eks/09_sous_reseau_vpc.JPG" class="img-fluid" alt="Sous-réseau VPC">
+            <img src="assets/img/eks/10_vue_globale_sous_reseaux.JPG" class="img-fluid" alt="Vue globale sous-réseaux">
+            <img src="assets/img/eks/11_cluster_eks_infoeks_vue_generale.JPG" class="img-fluid" alt="Cluster EKS — vue générale">
+            <img src="assets/img/eks/05_lambda_overview.JPG" class="img-fluid" alt="Aperçu fonction Lambda">
+            <img src="assets/img/eks/06_lambda_test_event.JPG" class="img-fluid" alt="Test événement Lambda">
+            <img src="assets/img/eks/07_lambda_handler_configuration.JPG" class="img-fluid" alt="Configuration handler Lambda">
           </div>
         </div>
 
-        <div class="row">
-          <!-- Carousel / screenshots -->
-          <div class="col-lg-8">
-            <div class="owl-carousel portfolio-details-carousel">
-             
-            <img src="assets/img/01_ec2_instance_resume.jpg" class="img-fluid" alt="Résumé instance EC2">
-            <img src="assets/img/02_ec2_instance_networking.jpg" class="img-fluid" alt="Réseau EC2 / VPC">
-            <img src="assets/img/03_ec2_storage_monitoring.jpg" class="img-fluid" alt="Stockage EC2">
-            <img src="assets/img/04_eks_cluster_dashboard.jpg" class="img-fluid" alt="Tableau de bord EKS">
-            <img src="assets/img/08_cluster_eks_details.jpg" class="img-fluid" alt="Détails du cluster EKS">
-            <img src="assets/img/05_lambda_overview.jpg" class="img-fluid" alt="Aperçu fonction Lambda">
-            <img src="assets/img/06_lambda_test_event.jpg" class="img-fluid" alt="Test d’événement Lambda">
-            <img src="assets/img/07_lambda_handler_configuration.jpg" class="img-fluid" alt="Configuration handler Lambda">
-            </div>
-          </div>
-
-          <!-- Faits rapides -->
-          <div class="col-lg-4 portfolio-info">
-            <h3 class="text-center"><strong>En un coup d’œil</strong></h3>
+        <!-- Aside -->
+        <div class="col-lg-4">
+          <div class="aside-card">
+            <h5>Docker / IaC : EKS + Lambda</h5>
+            <p class="kicker">
+              Déploiement <b>automatisé</b> d’un cluster <b>Kubernetes (EKS)</b> et d’un service
+              <b>serverless (AWS Lambda Java)</b>, orchestré par <b>Terraform</b> depuis une VM <b>EC2</b> (Free Tier).
+              Objectif : une infra reproductible, des artefacts propres et un cleanup pour éviter la facturation.
+            </p>
 
             <div class="mb-2">
-              <span class="chip"><i class="bx bx-cloud mr-1"></i> AWS (Free Tier)</span>
-              <span class="chip"><i class="bx bx-git-branch mr-1"></i> Terraform IaC</span>
-              <span class="chip"><i class="bx bx-dock-top mr-1"></i> EKS</span>
-              <span class="chip"><i class="bx bx-bolt-circle mr-1"></i> Lambda (Java)</span>
-              <span class="chip"><i class="bx bx-terminal mr-1"></i> PowerShell/SSH</span>
-              <span class="chip"><i class="bx bx-cube mr-1"></i> Docker (prévu étape 2)</span>
+              <span class="chip">Terraform</span>
+              <span class="chip">AWS</span>
+              <span class="chip">EC2</span>
+              <span class="chip">EKS</span>
+              <span class="chip">VPC / Subnets</span>
+              <span class="chip">Node Group</span>
+              <span class="chip">IAM</span>
+              <span class="chip">Lambda (Java 11)</span>
+              <span class="chip">Maven</span>
+              <span class="chip">PowerShell/SSH</span>
+              <span class="chip">Free Tier</span>
+              <span class="chip">Troubleshooting</span>
             </div>
 
-            <ul class="mb-2">
-              <li><strong>Rôle</strong> : Ingénieur Cloud / DevOps</li>
-              <li><strong>Scope</strong> : Infra (VPC, subnets, EKS, IAM), serverless Java</li>
-              <li><strong>Livrables</strong> : stack Terraform, binaire Lambda, doc d’exploitation</li>
-            </ul>
+            <p class="mb-1"><b>Catégorie :</b> Cloud / DevOps</p>
+            <p class="mb-1"><b>Contexte :</b> VM Amazon Linux 2 (t2.micro) — manip’ depuis PowerShell + clé <code>.pem</code>.</p>
+            <p class="mb-3"><b>Livrables :</b> fichiers <code>.tf</code> (VPC/EKS/IAM), artefacts Java Lambda, consignes de backup/cleanup.</p>
 
-            <p class="mb-0">
-              <span class="hl">Résultat :</span> un <strong>cluster Kubernetes opérationnel</strong> déployé par Terraform et
-              une <strong>fonction Lambda Java</strong> testée avec succès via la console AWS. Nettoyage final effectué
-              (suppression des NodeGroups/Clusters/EC2) pour éviter toute facturation résiduelle.
-            </p>
+            <a class="btn-repo" href="https://github.com/avisse?tab=repositories" target="_blank" rel="noopener">
+              <i class="bx bxl-github"></i> Voir le repository GitHub
+            </a>
           </div>
         </div>
+      </div>
 
-        <!-- Contexte & stack -->
-        <div class="row mt-5">
-          <div class="col-lg-12">
-            <h3 class="brand-blue mb-3">Contexte & choix techniques</h3>
-            <p>
-              Pour ce <strong>exercice d’automatisation</strong>, j’ai démarré d’une feuille blanche sur AWS : création d’une
-              instance <strong>EC2</strong> (VM de travail), installation des outils, écriture des
-              <strong>manifests Terraform</strong>, déploiement <strong>EKS</strong>, puis réalisation d’un
-              <strong>service serverless</strong> en Java via <strong>AWS Lambda</strong>. Le parti-pris : privilégier
-              <em>l’infrastructure as code</em>, des étapes reproductibles et un nettoyage propre.
-            </p>
-            <ul class="mb-2">
-              <li><strong>Provider</strong> : AWS</li>
-              <li><strong>Outils</strong> : Terraform, PowerShell/SSH, Docker (installé pour l’activité suivante), Maven</li>
-              <li><strong>Services</strong> : EC2, EKS, IAM, Lambda</li>
-            </ul>
-          </div>
-        </div>
+      <!-- ======= Accordéons ======= -->
+      <div class="row mt-4">
+        <div class="col-lg-12">
 
-        <!-- Étapes réalisées -->
-        <div class="row mt-4">
-          <div class="col-lg-12">
-            <h3 class="brand-blue mb-3">Étapes réalisées</h3>
-
-            <div class="faq-item">
-              <p class="question">Étape 1 — Création de la machine de travail (EC2) <span class="arrow">▼</span></p>
-              <div class="answer">
+          <!-- Contexte -->
+          <div class="faq-item">
+            <div class="question" onclick="toggleAnswer('ans0', this)">
+              Contexte & objectifs
+              <span class="arrow"><i class="bx bx-chevron-down"></i></span>
+            </div>
+            <div class="answer" id="ans0">
+              <div class="p-2">
+                <p>
+                  L’objectif : déployer une <b>stack cloud reproductible</b> combinant
+                  un <b>cluster EKS</b> (pour exécuter des workloads conteneurisés) et un <b>service AWS
+                  Lambda</b> (Java) pour illustrer un pattern <em>serverless</em>, le tout <b>provisionné par Terraform</b>.
+                  J’ai volontairement travaillé en <b>Free Tier</b> avec une VM <b>EC2</b> comme poste d’orchestration.
+                </p>
                 <ul>
-                  <li>Instance <strong>t2.micro</strong> (Free Tier) + <strong>clé .pem</strong></li>
-                  <li>Connexion SSH depuis PowerShell :
-                    <pre class="code"><code>ssh -i .\cle-ecf.pem ec2-user@&lt;IP_publique_EC2&gt;</code></pre>
-                  </li>
+                  <li><b>Infra as Code :</b> un seul <em>plan Terraform</em> versionné pour (re)créer la même infra.</li>
+                  <li><b>Séparation claire :</b> fichiers <code>provider.tf</code>, <code>variables.tf</code>, <code>main.tf</code>, <code>outputs.tf</code>, <code>iam.tf</code>.</li>
+                  <li><b>Explicabilité :</b> captures, logs, et un cleanup strict pour maîtriser les coûts.</li>
                 </ul>
-                <p class="muted mb-0">Capture : résumé de l’instance EC2 (ID, VPC, security groups, AMI).</p>
               </div>
             </div>
+          </div>
 
-            <div class="faq-item">
-              <p class="question">Étape 2 — Installation des outils sur la VM <span class="arrow">▼</span></p>
-              <div class="answer">
-<pre class="code"><code># Docker (préparé pour l’activité 2)
+          <!-- Architecture & Terraform -->
+          <div class="faq-item">
+            <div class="question" onclick="toggleAnswer('ans1', this)">
+              Architecture & Terraform
+              <span class="arrow"><i class="bx bx-chevron-down"></i></span>
+            </div>
+            <div class="answer" id="ans1">
+              <div class="p-2">
+                <p><b>Vue d’ensemble :</b></p>
+                <ul>
+                  <li><b>EC2 (poste d’admin)</b> : installation de Docker & Terraform.</li>
+                  <li><b>VPC</b> + <b>subnets</b> publics/privés + <b>Route Tables</b> + <b>Security Groups</b>.</li>
+                  <li><b>EKS</b> : cluster + <b>Node Group</b> avec IP publique (cf. correctif ci-dessous).</li>
+                  <li><b>IAM</b> : rôles & policies pour EKS/Nodes & Lambda.</li>
+                  <li><b>Lambda Java</b> : artefact <code>.jar</code> compilé avec Maven, déployé dans AWS.</li>
+                </ul>
+
+                <p class="mb-2"><b>Commandes exécutées depuis EC2 :</b></p>
+                <pre><code class="language-bash"># Mises à jour + outils
 sudo yum update -y
 sudo yum install -y docker
 sudo systemctl enable --now docker
 
-# Terraform (repo HashiCorp pour Amazon Linux)
+# Terraform (Amazon Linux 2)
 sudo yum install -y yum-utils
 sudo yum-config-manager --add-repo https://rpm.releases.hashicorp.com/AmazonLinux/hashicorp.repo
-sudo yum install -y terraform
+sudo yum install terraform -y
 
-terraform -version</code></pre>
+# Terraform workflow
+terraform init
+terraform plan
+terraform apply
+                </code></pre>
+
+                <p class="mb-2"><b>Correctif “Node Group”</b> (erreur CREATE_FAILED) :</p>
+                <pre><code>// Dans la définition des subnets publics
+map_public_ip_on_launch = true
+                </code></pre>
+
+                <p class="mb-2"><b>Outputs utiles</b> (exemples) :</p>
+                <pre><code>output "cluster_name"   { value = aws_eks_cluster.main.name }
+output "cluster_endpoint" { value = aws_eks_cluster.main.endpoint }
+output "oidc_issuer"      { value = aws_eks_cluster.main.identity[0].oidc[0].issuer }
+                </code></pre>
               </div>
             </div>
+          </div>
 
-            <div class="faq-item">
-              <p class="question">Étape 3 — Stack Terraform (provider, VPC, EKS, NodeGroup, IAM…) <span class="arrow">▼</span></p>
-              <div class="answer">
-                <p><strong>Fichiers</strong> : <code>provider.tf</code>, <code>variables.tf</code>, <code>main.tf</code>, <code>iam.tf</code>, <code>outputs.tf</code>.</p>
-<pre class="code"><code># provider.tf (extrait)
-provider "aws" {
+          <!-- Détail des fichiers -->
+          <div class="faq-item">
+            <div class="question" onclick="toggleAnswer('ans2', this)">
+              Détail des fichiers du projet (.tf & Java)
+              <span class="arrow"><i class="bx bx-chevron-down"></i></span>
+            </div>
+            <div class="answer" id="ans2">
+              <div class="p-2">
+                <p><b>Arborescence (exemple)</b></p>
+                <pre><code>infra/
+├─ provider.tf       # Region, authentification AWS
+├─ variables.tf      # Noms cluster, CIDR, AZs, tailles, versions…
+├─ main.tf           # VPC/Subnets/Routes + EKS + Node Group + SG
+├─ iam.tf            # Rôles & policies (EKS, nodes, Lambda)
+├─ outputs.tf        # Valeurs de sortie (endpoint, OIDC, etc.)
+hello-lambda/
+├─ pom.xml
+├─ src/main/java/com/infoline/lambda/App.java
+                </code></pre>
+
+                <p class="mb-1"><b>provider.tf :</b> région + provider AWS.</p>
+                <pre><code>provider "aws" {
   region = var.aws_region
 }
+                </code></pre>
 
-# variables.tf (extrait)
-variable "cluster_name" { type = string  default = "eks-dev" }
-variable "aws_region"   { type = string  default = "eu-west-3" }
+                <p class="mb-1"><b>variables.tf :</b> toutes les variables paramétrables (noms, versions, CIDR, tailles, etc.).</p>
+                <pre><code>variable "aws_region"   { default = "eu-west-3" }
+variable "cluster_name" { default = "info-eks-cluster" }
+variable "vpc_cidr"     { default = "172.31.0.0/16" }
+                </code></pre>
 
-# outputs.tf (extrait)
-output "cluster_name"   { value = aws_eks_cluster.this.name }
-output "cluster_endpoint" { value = aws_eks_cluster.this.endpoint }</code></pre>
-              </div>
-            </div>
+                <p class="mb-1"><b>main.tf :</b> déclaration du VPC, subnets, routes, SG, <b>aws_eks_cluster</b>, <b>aws_eks_node_group</b>.</p>
 
-            <div class="faq-item">
-              <p class="question">Étape 4 — Déploiement automatisé <span class="arrow">▼</span></p>
-              <div class="answer">
-<pre class="code"><code>terraform init
-terraform plan
-terraform apply # ➜ cluster EKS + Node Group opérationnels</code></pre>
-                <p class="mb-2">⚠️ <em>Point d’attention</em> : s’assurer que les subnets destinés aux nodes exposent une <strong>IP publique</strong> lors du lancement.</p>
-              </div>
-            </div>
-          </div>
-        </div>
+                <p class="mb-1"><b>iam.tf :</b> rôles/policies pour EKS, nodes et Lambda (attach policies gérées + inline si besoin).</p>
 
-        <!-- Problèmes rencontrés -->
-        <div class="row mt-4">
-          <div class="col-lg-12">
-            <h3 class="brand-blue mb-3">Problèmes rencontrés & solutions</h3>
-            <div class="table-responsive">
-              <table class="table table-sm table-bordered table-issues">
-                <thead class="thead-light">
-                  <tr>
-                    <th style="width: 38%">Problème</th>
-                    <th>Analyse</th>
-                    <th style="width: 36%">Solution retenue</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td><strong>CREATE_FAILED</strong> sur le Node Group</td>
-                    <td>Les instances du Node Group n’obtenaient pas d’IP publique → nœuds injoignables.</td>
-                    <td>Activer <code>map_public_ip_on_launch = true</code> sur les subnets publics (Terraform).</td>
-                  </tr>
-                  <tr>
-                    <td>Relance automatique d’instances EC2 / ressources persistantes</td>
-                    <td>Ressources EKS partiellement détruites (NodeGroup/Cluster).</td>
-                    <td>Suppression manuelle côté console EKS (NodeGroups + Clusters) puis « destroy » propre.</td>
-                  </tr>
-                  <tr>
-                    <td>Lambda Java — handler non reconnu</td>
-                    <td>Chemin de handler / package incorrect dans la conf Lambda.</td>
-                    <td>Vérifier le <code>package</code> et définir <code>package.App::handleRequest</code> dans Lambda.</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
-
-        <!-- Lambda Java -->
-        <div class="row mt-4">
-          <div class="col-lg-12">
-            <h3 class="brand-blue mb-3">Service Serverless : AWS Lambda (Java)</h3>
-
-            <div class="faq-item">
-              <p class="question">Projet & dépendances (Maven) <span class="arrow">▼</span></p>
-              <div class="answer">
-<pre class="code"><code># app/src/main/java/com/infoline/lambda/App.java (exemple)
-package com.infoline.lambda;
-
-import com.amazonaws.services.lambda.runtime.Context;
-import com.amazonaws.services.lambda.runtime.RequestHandler;
-
-public class App implements RequestHandler&lt;String, String&gt; {
+                <p class="mb-1"><b>App.java (Lambda) :</b> handler simple (Java 11).</p>
+                <pre><code class="language-java">public class App implements com.amazonaws.services.lambda.runtime.RequestHandler&lt;String, String&gt; {
   @Override
-  public String handleRequest(String input, Context context) {
+  public String handleRequest(String input, com.amazonaws.services.lambda.runtime.Context context) {
     return "Bonjour depuis AWS Lambda, tu m’as dit : " + input;
   }
-}</code></pre>
+}
+                </code></pre>
 
-<pre class="code"><code>&lt;!-- pom.xml (extraits) --&gt;
-&lt;dependency&gt;
+                <p class="mb-1"><b>pom.xml :</b> dépendances et plugin de compilation (Java 1.8/11 selon runtime choisi).</p>
+                <pre><code>&lt;dependency&gt;
   &lt;groupId&gt;com.amazonaws&lt;/groupId&gt;
   &lt;artifactId&gt;aws-lambda-java-core&lt;/artifactId&gt;
   &lt;version&gt;1.2.1&lt;/version&gt;
 &lt;/dependency&gt;
 
-&lt;build&gt;
-  &lt;plugins&gt;
-    &lt;plugin&gt;
-      &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;
-      &lt;artifactId&gt;maven-compiler-plugin&lt;/artifactId&gt;
-      &lt;version&gt;3.8.1&lt;/version&gt;
-      &lt;configuration&gt;
-        &lt;source&gt;1.8&lt;/source&gt;
-        &lt;target&gt;1.8&lt;/target&gt;
-      &lt;/configuration&gt;
-    &lt;/plugin&gt;
-  &lt;/plugins&gt;
-&lt;/build&gt;</code></pre>
-                <p class="mb-2">Compilation :</p>
-<pre class="code"><code>mvn clean package
-# ➜ target/hello-lambda-1.0-SNAPSHOT.jar</code></pre>
-                <p class="mb-0">Déploiement via la console : runtime <strong>Java 8 (Corretto)</strong>, upload du <code>.jar</code>, handler <code>com.infoline.lambda.App::handleRequest</code>, test manuel OK.</p>
+&lt;plugin&gt;
+  &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;
+  &lt;artifactId&gt;maven-compiler-plugin&lt;/artifactId&gt;
+  &lt;version&gt;3.8.1&lt;/version&gt;
+  &lt;configuration&gt;
+    &lt;source&gt;1.8&lt;/source&gt;
+    &lt;target&gt;1.8&lt;/target&gt;
+  &lt;/configuration&gt;
+&lt;/plugin&gt;
+                </code></pre>
               </div>
             </div>
           </div>
-        </div>
 
-        <!-- Nettoyage & coûts -->
-        <div class="row mt-4">
-          <div class="col-lg-12">
-            <h3 class="brand-blue mb-3">Nettoyage & maîtrise des coûts</h3>
-            <p>
-              Après validation fonctionnelle, j’ai procédé à un <strong>nettoyage complet</strong> : suppression des NodeGroups,
-              du Cluster EKS et de l’EC2 inutilisé. <em>Objectif</em> : éviter toute <strong>facturation involontaire</strong>.
-              (Il m’est arrivé une fois d’avoir un redeploy auto : j’ai corrigé le script et documenté la procédure de
-              <code>destroy</code>).
-            </p>
-          </div>
-        </div>
+          <!-- Déploiement & tests -->
+          <div class="faq-item">
+            <div class="question" onclick="toggleAnswer('ans3', this)">
+              Déploiement & tests (EKS + Lambda)
+              <span class="arrow"><i class="bx bx-chevron-down"></i></span>
+            </div>
+            <div class="answer" id="ans3">
+              <div class="p-2">
+                <p><b>Cluster EKS</b></p>
+                <ul>
+                  <li><code>terraform apply</code> → création VPC/Subnets/Routes/SG + EKS + Node Group.</li>
+                  <li>Vérif console : <em>Cluster health = 0 issues</em>, endpoint exposé, OIDC actif.</li>
+                </ul>
 
-        <!-- Arborescence -->
-        <div class="row mt-2">
-          <div class="col-lg-12">
-            <h3 class="brand-blue mb-3">Arborescence du projet</h3>
-<pre class="code"><code>infra/
-├── provider.tf
-├── variables.tf
-├── main.tf
-├── iam.tf
-└── outputs.tf
-hello-lambda/
-├── pom.xml
-└── src/main/java/com/infoline/lambda/App.java</code></pre>
-          </div>
-        </div>
+                <p><b>Lambda Java</b></p>
+                <pre><code class="language-bash"># Compilation sur EC2
+sudo yum install -y maven
+mvn -f hello-lambda/pom.xml clean package
 
-        <!-- Annexes techniques -->
-        <div class="row mt-2">
-          <div class="col-lg-12">
-            <h3 class="brand-blue mb-3">Annexes techniques (extraits utiles)</h3>
+# Artefact: hello-lambda/target/hello-lambda-1.0-SNAPSHOT.jar
+# Upload dans la console Lambda (runtime Java 11)
+# Handler: com.infoline.lambda.App::handleRequest
+                </code></pre>
 
-            <div class="faq-item">
-              <p class="question">Connexion PowerShell / SSH & droits clés <span class="arrow">▼</span></p>
-              <div class="answer">
-<pre class="code"><code># Protéger la clé sous Windows (Git Bash)
-chmod 400 cle-ecf.pem
-
-# SSH
-ssh -i .\cle-ecf.pem ec2-user@&lt;ip-ec2&gt;</code></pre>
+                <p><b>Test console</b> (événement JSON simple) → <em>réponse correcte</em> avec la chaîne renvoyée.</p>
               </div>
             </div>
+          </div>
 
-            <div class="faq-item">
-              <p class="question">Terraform — suppression propre <span class="arrow">▼</span></p>
-              <div class="answer">
-<pre class="code"><code># Détruire toutes les ressources gérées
+          <!-- Problèmes & solutions -->
+          <div class="faq-item">
+            <div class="question" onclick="toggleAnswer('ans4', this)">
+              Problèmes rencontrés & solutions
+              <span class="arrow"><i class="bx bx-chevron-down"></i></span>
+            </div>
+            <div class="answer" id="ans4">
+              <div class="p-2">
+                <table class="table table-sm">
+                  <thead><tr><th style="width:45%">Problème</th><th>Solution</th></tr></thead>
+                  <tbody>
+                    <tr>
+                      <td><b>CREATE_FAILED</b> sur le <i>Node Group</i> (nodes injoignables)</td>
+                      <td>Forcer <code>map_public_ip_on_launch = true</code> sur les subnets publics.</td>
+                    </tr>
+                    <tr>
+                      <td>Instances EC2 “fantômes”/ressources qui se relancent</td>
+                      <td>Suppression manuelle des Node Groups/Clusters côté console EKS puis <code>terraform destroy</code>.</td>
+                    </tr>
+                    <tr>
+                      <td>Compilation Maven : <i>source release 5 is no longer supported</i></td>
+                      <td>Configurer <b>maven-compiler-plugin</b> en 1.8 (ou 11) dans le <code>pom.xml</code>.</td>
+                    </tr>
+                    <tr>
+                      <td>Handler Lambda non reconnu</td>
+                      <td>Vérifier le <b>package</b> Java et le handler : <code>com.infoline.lambda.App::handleRequest</code>.</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <!-- Nettoyage & coûts -->
+          <div class="faq-item">
+            <div class="question" onclick="toggleAnswer('ans5', this)">
+              Nettoyage & maîtrise des coûts
+              <span class="arrow"><i class="bx bx-chevron-down"></i></span>
+            </div>
+            <div class="answer" id="ans5">
+              <div class="p-2">
+                <ul>
+                  <li><b>Destroy IaC :</b> <code>terraform destroy</code> après avoir vidé les dépendances (Node Groups → Cluster).</li>
+                  <li><b>EC2 :</b> arrêter/terminer la VM d’orchestration si elle n’est plus utilisée.</li>
+                  <li><b>Conseil :</b> surveiller la console Billing + activer alertes budgétaires pour éviter toute surprise.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- Bonnes pratiques -->
+          <div class="faq-item">
+            <div class="question" onclick="toggleAnswer('ans6', this)">
+              Sécurité & bonnes pratiques minimales
+              <span class="arrow"><i class="bx bx-chevron-down"></i></span>
+            </div>
+            <div class="answer" id="ans6">
+              <div class="p-2">
+                <ul>
+                  <li>Principe du <b>moindre privilège</b> sur les <b>roles/policies IAM</b>.</li>
+                  <li>Clé <code>.pem</code> protégée ; accès SSH restreint (IP source, SG).</li>
+                  <li>Pas de secrets en clair dans les sources — privilégier <em>variables d’environnement</em> ou AWS Secrets Manager.</li>
+                  <li>Versionner l’IaC, activer un <b>formatage</b> (<code>terraform fmt</code>) et un <b>lint</b> si possible.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- Commandes utiles -->
+          <div class="faq-item">
+            <div class="question" onclick="toggleAnswer('ans7', this)">
+              Commandes utiles
+              <span class="arrow"><i class="bx bx-chevron-down"></i></span>
+            </div>
+            <div class="answer" id="ans7">
+              <div class="p-2">
+                <pre><code class="language-bash"># Terraform
+terraform fmt && terraform validate
+terraform plan -out=tfplan
+terraform apply tfplan
 terraform destroy
 
-# En cas de ressources "orphelines" (EKS):
-# nettoyer à la main NodeGroup & Cluster dans la console,
-# puis relancer `terraform destroy`.</code></pre>
+# Maven
+mvn -f hello-lambda/pom.xml clean package
+
+# (facultatif) Kubectl une fois le kubeconfig récupéré
+aws eks update-kubeconfig --region &lt;region&gt; --name info-eks-cluster
+kubectl get nodes
+                </code></pre>
               </div>
             </div>
           </div>
-        </div>
 
-        <!-- Résultat -->
-        <div class="row mt-4">
-          <div class="col-lg-12">
-            <h3 class="brand-blue mb-2">Résultat final</h3>
-            <ul>
-              <li>Un <strong>cluster EKS</strong> créé et configurable en quelques minutes via Terraform.</li>
-              <li>Un <strong>service Lambda Java</strong> packagé et testé avec succès.</li>
-              <li>Des <strong>procédures reproductibles</strong> (déploiement / nettoyage), documentées et <strong>maîtrisées</strong>.</li>
-            </ul>
-          </div>
         </div>
-
       </div>
-    </section>
-    <!-- End Portfolio Details -->
-  </main>
 
-  <a href="#" class="back-to-top"><i class="bx bx-up-arrow-alt"></i></a>
-  <div id="preloader"></div>
+    </div>
+  </section><!-- End Portfolio Details -->
+</main>
 
-  <!-- Vendor JS -->
-  <script>
-    // FAQ toggles
-    document.addEventListener('click', function(e){
-      const q = e.target.closest('.question');
-      if(!q) return;
-      q.classList.toggle('active');
-      const ans = q.nextElementSibling;
-      ans.classList.toggle('visible');
-    });
-  </script>
-  <script src="assets/vendor/jquery/jquery.min.js"></script>
-  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="assets/vendor/jquery.easing/jquery.easing.min.js"></script>
-  <script src="assets/vendor/php-email-form/validate.js"></script>
-  <script src="assets/vendor/waypoints/jquery.waypoints.min.js"></script>
-  <script src="assets/vendor/counterup/counterup.min.js"></script>
-  <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
-  <script src="assets/vendor/venobox/venobox.min.js"></script>
-  <script src="assets/vendor/owl.carousel/owl.carousel.min.js"></script>
-  <script src="assets/vendor/typed.js/typed.min.js"></script>
-  <script src="assets/vendor/aos/aos.js"></script>
-  <script src="assets/js/main.js"></script>
+<a href="#" class="back-to-top"><i class="bx bx-up-arrow-alt"></i></a>
+<div id="preloader"></div>
+
+<!-- Vendor JS -->
+<script src="assets/vendor/jquery/jquery.min.js"></script>
+<script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="assets/vendor/jquery.easing/jquery.easing.min.js"></script>
+<script src="assets/vendor/venobox/venobox.min.js"></script>
+<script src="assets/vendor/waypoints/jquery.waypoints.min.js"></script>
+<script src="assets/vendor/counterup/counterup.min.js"></script>
+<script src="assets/vendor/owl.carousel/owl.carousel.min.js"></script>
+<script src="assets/vendor/typed.js/typed.min.js"></script>
+<script src="assets/vendor/aos/aos.js"></script>
+
+<!-- Template JS -->
+<script src="assets/js/main.js"></script>
+
+<script>
+  // Accordéon
+  function toggleAnswer(id, el){
+    const ans = document.getElementById(id);
+    const open = ans.classList.contains('answer-visible');
+    document.querySelectorAll('.answer').forEach(a=>a.classList.remove('answer-visible'));
+    document.querySelectorAll('.question').forEach(q=>q.classList.remove('answer-visible'));
+    if(!open){ ans.classList.add('answer-visible'); el.classList.add('answer-visible'); }
+  }
+</script>
 </body>
 </html>
