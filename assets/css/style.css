@@ -60,8 +60,8 @@ h1, h2, h3, h4, h5, h6 {
 # photo profil
 --------------------------------------------------------------*/
 .profile-pic{
-  width: 340px;
-  height: 340px;
+  width: 350px;
+  height: 350px;
   object-fit: cover;
   object-position: 50% 25%;  /* <— décale la zone visible vers le bas (tête plus basse) */
   border-radius: 50%;
