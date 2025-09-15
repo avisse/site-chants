@@ -59,14 +59,14 @@ h1, h2, h3, h4, h5, h6 {
 /*--------------------------------------------------------------
 # photo profil
 --------------------------------------------------------------*/
-/* Photo profil */
 .profile-pic{
-  width: 320px;            /* plus grand sur desktop */
+  width: 320px;
   height: 320px;
   object-fit: cover;
+  object-position: 50% 62%;  /* <— décale la zone visible vers le bas (tête plus basse) */
   border-radius: 50%;
-  background: #fff;        /* anneau blanc propre */
-  padding: 6px;            /* épaisseur de l’anneau */
+  background: #fff;
+  padding: 6px;
   box-shadow: 0 6px 24px rgba(0,0,0,.18);
 }
 
