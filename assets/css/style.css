@@ -60,13 +60,14 @@ h1, h2, h3, h4, h5, h6 {
 # photo profil
 --------------------------------------------------------------*/
 .profile-pic {
-  width: 250px;         /* ajuste la taille comme tu veux */
-  height: 250px;        /* garde un format carré pour avoir un cercle parfait */
-  object-fit: cover;    /* recadre proprement l’image */
-  border-radius: 50%;   /* rend l’image ronde */
-  border: 3px solid #fff; /* optionnel : petite bordure blanche */
-  box-shadow: 0px 0px 10px rgba(0,0,0,0.2); /* optionnel : effet ombré */
+  width: 250px;
+  height: 250px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 3px solid #fff;
+  box-shadow: 0px 0px 10px rgba(0,0,0,0.2);
 }
+
 
 
 /*--------------------------------------------------------------
