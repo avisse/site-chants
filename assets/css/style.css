@@ -63,11 +63,23 @@ h1, h2, h3, h4, h5, h6 {
   width: 350px;
   height: 350px;
   object-fit: cover;
-  object-position: 50% 72%;  /* <— décale la zone visible vers le bas (tête plus basse) */
+  object-position: 50% 50%;   /* re-centre proprement */
   border-radius: 50%;
   background: #fff;
   padding: 6px;
   box-shadow: 0 6px 24px rgba(0,0,0,.18);
+
+  /* >>> dézoom + descente de la tête dans le cadre <<< */
+  transform: translateY(8%) scale(.88);
+  transform-origin: center;
+}
+
+/* Mobile */
+@media (max-width: 991.98px){
+  .profile-pic{
+    width: 240px; height: 240px;
+    transform: translateY(6%) scale(.90);
+  }
 }
 
 /* Centrer et respirer la colonne image */
