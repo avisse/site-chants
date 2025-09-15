@@ -63,7 +63,7 @@ h1, h2, h3, h4, h5, h6 {
   width: 340px;
   height: 340px;
   object-fit: cover;
-  object-position: 50% 30%;  /* <— décale la zone visible vers le bas (tête plus basse) */
+  object-position: 50% 25%;  /* <— décale la zone visible vers le bas (tête plus basse) */
   border-radius: 50%;
   background: #fff;
   padding: 6px;
@@ -74,17 +74,6 @@ h1, h2, h3, h4, h5, h6 {
 .about .col-lg-4{
   display: flex;
   justify-content: center;
-}
-
-/* Responsive : plus petit sur mobile/tablette */
-@media (max-width: 991.98px){
-  .profile-pic{
-    width: 200px;
-    height: 200px;
-    object-position: 50% 35%; /* un poil différent sur mobile si besoin */
-    padding: 4px;
-    box-shadow: 0 4px 16px rgba(0,0,0,.15);
-  }
 }
 /* Header compact */
 .about-header{ margin: 0 0 1.5rem; }
