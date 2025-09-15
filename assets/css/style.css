@@ -86,21 +86,26 @@ h1, h2, h3, h4, h5, h6 {
     box-shadow: 0 4px 16px rgba(0,0,0,.15);
   }
 }
-/* Liste infos : alignements propres */
-.about-list{ list-style: none; padding-left: 0; margin: 0; }
+/* Liste "À propos" : alignements propres en 1 ligne */
+.about-list{ list-style: none; padding: 0; margin: 0; }
 .about-list li{
   display: flex;
-  align-items: flex-start;
+  align-items: baseline;
   gap: .5rem;
-  margin-bottom: .4rem;
+  margin-bottom: .45rem;
   line-height: 1.4;
 }
 .about-list i{ margin-top: .2rem; }
-.about-label{ min-width: 110px; font-weight: 600; } /* aligne Téléphone / Ville / Diplôme / Mail */
 
-/* Responsive */
+/* même largeur pour les libellés -> colonnes alignées */
+.about-label{ flex: 0 0 120px; font-weight: 700; }
+.about-value{ flex: 1 1 auto; }
+
+/* garder sur une seule ligne (desktop), mais autoriser le wrap sur mobile */
+.nowrap{ white-space: nowrap; }
 @media (max-width: 991.98px){
-  .profile-pic{ width: 220px; height: 220px; object-position: 50% 35%; }
+  .about-label{ flex-basis: 105px; }
+  .nowrap{ white-space: normal; }
 }
 
 /*--------------------------------------------------------------
