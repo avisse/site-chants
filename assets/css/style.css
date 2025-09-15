@@ -59,26 +59,32 @@ h1, h2, h3, h4, h5, h6 {
 /*--------------------------------------------------------------
 # photo profil
 --------------------------------------------------------------*/
-/* Portrait rectangulaire à bord fin, aligné à gauche */
-.portrait{
-  display: block;
-  width: 380px;          /* largeur desktop (ajuste à ton goût) */
-  height: 500px;         /* hauteur fixe pour un vrai rectangle */
-  object-fit: cover;     /* recadre proprement dans le rectangle */
-  border: 2px solid #e6e6e6;  /* bord fin et discret */
-  border-radius: 12px;        /* coins légèrement arrondis */
-  box-shadow: none;           /* pas d’ombre lourde */
-  max-width: 100%;            /* sécurité sur petits écrans */
+/* --- Portrait rectangulaire à bord fin, contrôlé --- */
+.portrait-frame{
+  width: 100%;
+  max-width: 420px;         /* largeur max sur desktop */
+  aspect-ratio: 4 / 5;      /* format portrait (change en 3/4 si tu veux) */
+  border: 1.5px solid #e6e6e6;   /* bord fin */
+  border-radius: 12px;       /* coins doux (enlève si tu veux carré) */
+  overflow: hidden;          /* coupe ce qui dépasse */
+  background: #fff;          /* discret, pas de gros cadre */
 }
 
-/* Responsive : centré et plus petit sur mobile/tablette */
-@media (max-width: 991.98px){
-  .portrait{
-    width: 260px;
-    height: 340px;
-    margin: 0 auto;      /* centrer sur mobile */
-  }
+.portrait-img{
+  width: 100%;
+  height: 100% !important;   /* force le remplissage même si un thème met height:auto */
+  object-fit: cover;         /* recadre proprement */
+  display: block;
 }
+
+/* Ajuste l’échelle sur écrans plus petits */
+@media (max-width: 991.98px){
+  .portrait-frame{ max-width: 300px; border-radius: 10px; }
+}
+@media (max-width: 575.98px){
+  .portrait-frame{ max-width: 240px; border-radius: 8px; }
+}
+
 /*--------------------------------------------------------------
 # Preloader
 --------------------------------------------------------------*/
