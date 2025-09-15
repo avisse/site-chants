@@ -63,7 +63,7 @@ h1, h2, h3, h4, h5, h6 {
   width: 340px;
   height: 340px;
   object-fit: cover;
-  object-position: 45% 65%;  /* <— décale la zone visible vers le bas (tête plus basse) */
+  object-position: 50% 40%;  /* <— décale la zone visible vers le bas (tête plus basse) */
   border-radius: 50%;
   background: #fff;
   padding: 6px;
