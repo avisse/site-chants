@@ -1305,3 +1305,11 @@ section {
 .course-card .card-body{ padding:16px 18px 18px; }
 .course-card h3{ font-size:18px; margin:0 0 6px; line-height:1.35; }
 .course-card p{ margin:0; color:#606b77; }
+
+
+/*--------------------------------------------------------------
+# ecole
+--------------------------------------------------------------*/
+
+.icon-list li{margin-bottom:.5rem}
+.icon-list i{color:#0d5ea8;margin-right:.5rem;font-size:1.15rem;vertical-align:middle}
