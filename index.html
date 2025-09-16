@@ -102,8 +102,8 @@
   L’école vous accueille <strong>du lundi au samedi</strong>, en plein centre de Charmes :
   <a href="https://www.google.com/maps/search/?api=1&query=9+bis+rue+Anne+Li%C3%A9geois+88130+Charmes" target="_blank" rel="noopener">
     9 bis rue Anne Liégeois, 88130 Charmes
-  </a>.
-  Mon objectif : transmettre la technique avec bienveillance, développer l’oreille, le souffle et la posture,
+  </a>.</p>
+  <p><strong>🎯Mon objectif </strong>: transmettre la technique avec bienveillance, développer l’oreille, le souffle et la posture,
   et surtout <strong>le plaisir de chanter</strong>.
 </p>
 <p>
@@ -877,71 +877,109 @@
 
 
     <!-- ======= Contact Section ======= -->
-    <section id="contact" class="contact">
-      <div class="container" data-aos="fade-up">
+    <!-- ======= Contact ======= -->
+<section id="contact" class="contact-split">
+  <div class="container" data-aos="fade-up">
 
-        <div class="section-title">
-          <h2>Contactez-moi</h2>
+    <div class="row g-4 align-items-stretch">
+      <!-- Formulaire -->
+      <div class="col-lg-5">
+        <div class="contact-panel p-4 p-lg-5">
+          <p class="kicker mb-1">Rejoignez-nous</p>
+          <h3 class="h2 mb-3">Inscrivez-vous pour un cours&nbsp;!</h3>
+
+          <form method="POST" name="contactform" action="contact-form-handler.php" class="php-email-form">
+            <div class="form-row">
+              <div class="col-md-12 form-group mb-3">
+                <label for="name" class="form-label">Nom et prénom *</label>
+                <input type="text" name="name" id="name" class="form-control" placeholder="Jane Smith" required minlength="2">
+              </div>
+              <div class="col-md-12 form-group mb-3">
+                <label for="email" class="form-label">Email *</label>
+                <input type="email" name="email" id="email" class="form-control" placeholder="email@exemple.com" required>
+              </div>
+              <div class="col-md-12 form-group mb-3">
+                <label for="phone" class="form-label">Téléphone *</label>
+                <input type="tel" name="phone" id="phone" class="form-control" placeholder="06 12 34 56 78" required
+                       pattern="^(\+?\d{1,3}[\s.-]?)?(\d[\s.-]?){6,14}\d$">
+              </div>
+            </div>
+
+            <div class="form-group mb-3">
+              <label for="subject" class="form-label">Sujet</label>
+              <input type="text" name="subject" id="subject" class="form-control" placeholder="Cours, chorale, éveil…">
+            </div>
+
+            <div class="form-group mb-3">
+              <label for="message" class="form-label">Message *</label>
+              <textarea name="message" id="message" rows="5" class="form-control" placeholder="Votre demande…" required></textarea>
+            </div>
+
+            <div class="form-group form-check mb-4">
+              <input class="form-check-input" type="checkbox" value="ok" id="rgpd" required>
+              <label class="form-check-label" for="rgpd">
+                J’autorise ce site à conserver ma soumission pour me recontacter. *
+              </label>
+            </div>
+
+            <div class="mb-3">
+              <div class="loading">Envoi…</div>
+              <div class="error-message"></div>
+              <div class="sent-message">Merci ! Votre message a bien été envoyé.</div>
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-pill w-100">Envoyer le message</button>
+          </form>
         </div>
+      </div>
 
-        <div class="row mt-1">
-
-          <div class="col-lg-4">
-            <div class="info">
-              <div class="address">
-                <i class="icofont-google-map"></i>
-                <h4>Location:</h4>
-                <p>Montpellier</p>
-              </div>
-
-              <div class="email">
-                <i class="icofont-envelope"></i>
-                <h4>Email:</h4>
-                <p>avisse.steve@gmail.com</p>
-              </div>
-
-              <div class="phone">
-                <i class="icofont-phone" href="assets/img/memoiresteve.pdf"></i>
-                <h4>Téléphone:</h4>
-                <p>07.68.30.36.09</p>
-              </div>
-             
-
-          <div class="col-lg-8 mt-5 mt-lg-0">
-
-            <form method="POST" name="contactform" action="contact-form-handler.php" role="form" class="php-email-form">
-              <div class="form-row">
-                <div class="col-md-6 form-group">
-                  <input type="text" name="name" class="form-control" id="name" placeholder="Votre Nom" data-rule="minlen:4" data-msg="Please enter at least 4 chars" />
-                  <div class="validate"></div>
-                </div>
-                <div class="col-md-6 form-group">
-                  <input type="email" class="form-control" name="email" id="email" placeholder="Mail" data-rule="email" data-msg="Please enter a valid email" />
-                  <div class="validate"></div>
-                </div>
-              </div>
-              <div class="form-group">
-                <input type="text" class="form-control" name="subject" id="subject" placeholder="Sujet" data-rule="minlen:4" data-msg="Please enter at least 8 chars of subject" />
-                <div class="validate"></div>
-              </div>
-              <div class="form-group">
-                <textarea class="form-control" name="message" rows="5" data-rule="required" data-msg="Please write something for us" placeholder="Message"></textarea>
-                <div class="validate"></div>
-              </div>
-              <div class="mb-3">
-                <div class="loading">Loading</div>
-                <div class="error-message"></div>
-                <div class="sent-message">Votre message a été envoyé. Je vous remercie!</div>
-              </div>
-              <div class="text-center"><button type="submit"> Envoyer le message </button></div>
-            </form>
-
+      <!-- Carte + détails -->
+      <div class="col-lg-7">
+        <div class="map-card h-100">
+          <div class="map-responsive">
+            <iframe
+              title="Au p’tit bonheur le chant — plan"
+              src="https://www.google.com/maps?q=9%20bis%20rue%20Anne%20Li%C3%A9geois,%2088130%20Charmes&output=embed"
+              loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
           </div>
 
-        </div>
+          <div class="p-3 p-lg-4">
+            <div class="d-flex align-items-center mb-2">
+              <i class="bx bx-envelope me-2"></i>
+              <a href="mailto:avisse.steve@gmail.com">avisse.steve@gmail.com</a>
+            </div>
+            <div class="d-flex align-items-start mb-2">
+              <i class="bx bx-map me-2 mt-1"></i>
+              <a target="_blank" rel="noopener"
+                 href="https://www.google.com/maps/search/?api=1&query=9+bis+rue+Anne+Li%C3%A9geois+88130+Charmes">
+                9 bis rue Anne Liégeois, 88130 Charmes
+              </a>
+            </div>
+            <div class="d-flex align-items-center mb-3">
+              <i class="bx bx-time me-2"></i>
+              <span>Lundi → Samedi : 9h00–19h00 (sur rendez-vous) · Dimanche : fermé</span>
+            </div>
 
+            <div class="d-flex gap-2">
+              <a class="btn btn-outline-primary btn-pill"
+                 target="_blank" rel="noopener"
+                 href="https://www.google.com/maps/search/?api=1&query=9+bis+rue+Anne+Li%C3%A9geois+88130+Charmes">
+                <i class="bx bx-navigation"></i> Itinéraire
+              </a>
+              <a class="btn btn-outline-primary btn-pill"
+                 href="tel:+33648303609"><i class="bx bx-phone"></i> Appeler</a>
+            </div>
+          </div>
+        </div>
       </div>
-    </section><!-- End Contact Section -->
+    </div><!-- /row -->
+
+  </div>
+</section>
+<!-- End Contact -->
+
+
+    <!-- End Contact Section -->
 
   </main><!-- End #main -->
 
