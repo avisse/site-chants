@@ -1274,9 +1274,11 @@ section {
   font-size: 13px;
 }
 
-#footer .social-links a{
-  width:40px;height:40px;display:inline-flex;align-items:center;justify-content:center;
-  background:#0d5ea8;color:#fff;border-radius:50%;font-size:20px;transition:.2s;
+#footer .social-links{
+  display:flex;               /* au cas où d-flex n’est pas présent */
+  justify-content:center;     /* centre horizontalement */
+  align-items:center;         /* centre verticalement */
+  gap:.5rem;                  /* espace entre icônes si tu en ajoutes d’autres */
 }
 #footer .social-links a:hover{ transform:translateY(-2px); opacity:.9; }
 #footer a{ text-decoration:none; }
@@ -1321,8 +1323,8 @@ section {
 .contact-split{
   /* fond doux + image fixe cohérente avec le site */
   background:
-    linear-gradient(rgba(247,248,249,.96), rgba(247,248,249,.96)),
-    url("../img/hero-bg.jpg") center/cover fixed no-repeat;
+    linear-gradient(rgba(158, 161, 164, 0.863), rgba(247,248,249,.96)),
+    url("../img/hero.png") center/cover fixed no-repeat;
   padding: 60px 0;
 }
 
@@ -1375,6 +1377,12 @@ section {
   border:0; border-top-left-radius:16px; border-top-right-radius:16px;
 }
 
+/* Carte */
+.map-wrap{
+  border-radius:16px; overflow:hidden;
+  box-shadow:0 12px 30px rgba(0,0,0,.08);
+}
+
 /* Icônes de la colonne droite */
 .map-card i{ font-size:1.15rem; color:#0563bb; }
 
@@ -1401,6 +1409,11 @@ section {
 .btn-facebook:hover{background:#0f6ae6; border-color:#0f6ae6; color:#fff;}
 
 
+/* Carte */
+.map-wrap{
+  border-radius:16px; overflow:hidden;
+  box-shadow:0 12px 30px rgba(0,0,0,.08);
+}
 
 /* Hero – bouton Facebook plus visible */
 #hero .btn-facebook{
