@@ -1319,15 +1319,15 @@ section {
 /*--------------------------------------------------------------
 # contact
 --------------------------------------------------------------*/
-
+/* 
 .contact-split{
-  /* fond doux + image fixe cohérente avec le site */
+  /* fond doux + image fixe cohérente avec le site 
   background:
     linear-gradient(rgba(158, 161, 164, 0.863), rgba(247,248,249,.96)),
     url("../img/hero.png") center/cover fixed no-repeat;
   padding: 60px 0;
 }
-
+*/
 .contact-panel,
 .map-card{
   background:#fff;
