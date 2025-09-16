@@ -1383,3 +1383,19 @@ section {
   .contact-split{ background-attachment:scroll; }
   .map-responsive{ padding-bottom:62%; }
 }
+
+/* Horaires détaillés */
+.hours-list{list-style:none;margin:0;padding:0;}
+.hours-list li{
+  display:flex; justify-content:space-between; align-items:center;
+  padding:.5rem .75rem; margin-bottom:.45rem;
+  border:1px solid #e9edf2; border-radius:10px; background:#fff;
+}
+.hours-list .day{font-weight:600; text-transform:capitalize; color:#45505b;}
+.hours-list .time{font-variant-numeric:tabular-nums; color:#2f3a44;}
+.hours-list .time.closed{color:#a0a6ad;}
+
+/* Rangée de CTA sous les horaires */
+.cta-row{display:flex; gap:.5rem; flex-wrap:wrap;}
+.btn-facebook{background:#1877F2; border-color:#1877F2; color:#fff;}
+.btn-facebook:hover{background:#0f6ae6; border-color:#0f6ae6; color:#fff;}
