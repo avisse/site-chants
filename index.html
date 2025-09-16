@@ -874,16 +874,54 @@
   </main><!-- End #main -->
 
   <!-- ======= Footer ======= -->
-  <footer id="footer">
-    <div class="container">
-      <h3>Avisse Steve</h3>
-      <p>Et si jétais votre nouveau collègue ?</p>
-      <div class="social-links">
-        <a href="https://www.linkedin.com/in/steve-avisse-97aa6111b/" class="linkedin"><i class="bx bxl-linkedin"></i></a>
+<footer id="footer" class="footer py-5">
+  <div class="container">
+    <div class="row gy-4">
+      <div class="col-lg-5">
+        <h3 class="mb-2">Au p’tit bonheur le chant</h3>
+        <p class="mb-3">École de musique à Charmes (88130). Cours de chant, chorales, éveil musical.</p>
+        <nav class="small">
+          <a href="#prestations">Prestations & tarifs</a> ·
+          <a href="#ecole">L’école</a> ·
+          <a href="#contact">Contact</a> ·
+          <a href="#mentions-legales">Mentions légales</a>
+        </nav>
       </div>
-    
-      
-  </footer><!-- End Footer -->
+
+      <div class="col-lg-4">
+        <h5 class="mb-2">Coordonnées</h5>
+        <ul class="list-unstyled mb-0">
+          <li><i class="bx bx-map"></i> <a href="https://www.google.com/maps/search/?api=1&query=9+bis+rue+Anne+Li%C3%A9geois+88130+Charmes" target="_blank" rel="noopener">9 bis rue Anne Liégeois, 88130 Charmes</a></li>
+          <li><i class="bx bx-phone"></i> <a href="tel:+33648685673">06 48 68 56 73</a></li>
+          <li><i class="bx bx-envelope"></i> <a href="mailto:cloe.boulange@example.com">cloe.boulange@example.com</a></li>
+          <li class="small text-muted">Inscription possible toute l’année</li>
+        </ul>
+      </div>
+
+      <div class="col-lg-3">
+        <h5 class="mb-2">Suivez-nous</h5>
+        <div class="social-links d-flex gap-2">
+          <!-- Facebook (obligatoire) -->
+          <a href="https://www.facebook.com/people/Au-ptit-bonheur-le-chant/100083196399009/" class="facebook" target="_blank" rel="noopener" aria-label="Facebook">
+            <i class="bx bxl-facebook"></i>
+          </a>
+          <!-- LinkedIn (ton profil perso) -->
+          <a href="https://www.linkedin.com/in/steve-avisse-97aa6111b/" class="linkedin" target="_blank" rel="noopener" aria-label="LinkedIn">
+            <i class="bx bxl-linkedin"></i>
+          </a>
+        </div>
+        <p class="small mt-3 mb-0">© <span id="year"></span> Au p’tit bonheur le chant – Charmes</p>
+      </div>
+    </div>
+  </div>
+</footer>
+<!-- End Footer -->
+
+<script>
+  // année auto
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+
 
   <a href="#" class="back-to-top"><i class="bx bx-up-arrow-alt"></i></a>
   <div id="preloader"></div>
